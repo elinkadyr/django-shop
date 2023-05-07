@@ -9,6 +9,7 @@ from .serializers import CommentSerializer, FavoriteSerializer, RatingSerializer
 from .permissions import IsAuthor
 
 
+
 class CommentViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, GenericViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
@@ -22,6 +23,7 @@ class FavoriteViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Des
 
     def get_queryset(self):
         return self.queryset.filter(user=self.queryset.user)
+        
 
 
 class AddRatingAPIView(APIView):
