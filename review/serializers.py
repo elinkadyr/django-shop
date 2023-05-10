@@ -23,10 +23,6 @@ class RatingSerializer(ModelSerializer):
         model = Rating
         exclude = ('user',)
 
-    def validate(self, attrs):
-        super().validate(attrs)
-        attrs["user"] = self.context["request"].user
-        return attrs
 
     def create(self, validated_data):
         value = validated_data.pop("value")
