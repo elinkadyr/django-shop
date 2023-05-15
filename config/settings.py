@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'account',
     'main',
     'review',
+    'order',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# https://docs.djangoproject.coconfig("ALLOWED_HOSTS")m/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {

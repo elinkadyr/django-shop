@@ -1,13 +1,14 @@
-from rest_framework import mixins
-from rest_framework.viewsets import GenericViewSet
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from drf_yasg.utils import swagger_auto_schema
-from .models import Comment, Favorite, Rating
-from .serializers import CommentSerializer, FavoriteSerializer, RatingSerializer
-from .permissions import IsAuthor
+from rest_framework import mixins
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.viewsets import GenericViewSet
 
+from .models import Comment, Favorite, Rating
+from .permissions import IsAuthor
+from .serializers import (CommentSerializer, FavoriteSerializer,
+                          RatingSerializer)
 
 
 class CommentViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, GenericViewSet):
@@ -24,7 +25,6 @@ class FavoriteViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Des
     def get_queryset(self):
         return self.queryset.filter(user=self.queryset.user)
         
-
 
 class AddRatingAPIView(APIView):
     permission_classes = [IsAuthenticated]

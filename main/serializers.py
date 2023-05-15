@@ -3,6 +3,7 @@ from .models import Category, Product
 from review.serializers import CommentSerializer
 from .helpers import send_spam
 
+
 class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category

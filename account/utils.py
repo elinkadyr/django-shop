@@ -17,3 +17,5 @@ def send_activation_code(email: str, code: str):
         recipient_list=[email],
         html_message=html
     )
+
+

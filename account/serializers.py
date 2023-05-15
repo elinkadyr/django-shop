@@ -1,6 +1,6 @@
 from rest_framework import serializers  
 
-from .models import User
+from .models import User, Billing
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
@@ -11,10 +11,8 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         fields = ('email', 'phone', 'password', 'password_confirm')
 
     def validate(self, attrs):
-        print('attrs before', attrs)
         pass1 = attrs.get("password")
         pass2 = attrs.pop("password_confirm")
-        print('attrs after', attrs)
         if pass1 != pass2:
             raise serializers.ValidationError("passwords do not match")
         return attrs
@@ -26,3 +24,9 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
+
+
+class BillingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Billing
+        fields = ("amount", )
