@@ -5,9 +5,10 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 
 from .models import User
-from .serializers import RegisterUserSerializer, BillingSerializer
+from .serializers import RegisterUserSerializer, BillingSerializer, ProfileSerializer
 
 
 class RegisterUserView(APIView):
@@ -28,7 +29,6 @@ class ActivateView(APIView):
         return redirect('https://google.com')
 
 
-
 class TopUpBillingView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -46,4 +46,8 @@ class TopUpBillingView(APIView):
         if billing.top_up(amount):
             return Response(status=200)
         return Response("invalid amount", status=400)
-    
+
+
+class ProfileViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = ProfileSerializer
